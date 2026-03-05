@@ -104,3 +104,58 @@ plt.xlabel("epochs")
 plt.ylabel("RMSE")
 plt.title("Évolution de la RMSE")
 plt.show()
+
+# ───── PARTIE F ─────
+
+# modèle linéaire
+def linear_regression(a, b, x):
+    return a * x + b
+
+def backpropagation_linear(a, b, x, y, lr):
+    y_pred = linear_regression(a, b, x)
+    err = y_pred - y
+    
+    dL_da = (2/len(x)) * np.sum(err * x)
+    dL_db = (2/len(x)) * np.sum(err)
+    
+    a -= lr * dL_da
+    b -= lr * dL_db
+    
+    return a, b, rmse(y_pred, y)
+
+def gradient_descent_linear(x, y, lr=0.01, epochs=1000):
+    a = np.random.randn()
+    b = np.random.randn()
+    hist = []
+    
+    for epoch in range(epochs):
+        a, b, score = backpropagation_linear(a, b, x, y, lr)
+        hist.append(score)
+    
+    return a, b, hist
+
+# j'entraîne les deux
+a_lin, b_lin, hist_lin = gradient_descent_linear(x_norm, y_norm)
+a_q, b_q, c_q, hist_q = gradient_descent_quadratic(x_norm, y_norm)
+
+# RMSE finale des deux
+print(f"linéaire   : {hist_lin[-1]:.4f}")
+print(f"quadratique : {hist_q[-1]:.4f}")
+
+# je trace les deux courbes
+x_ligne = np.linspace(x_norm.min(), x_norm.max(), 100)
+
+plt.scatter(x_norm, y_norm, label="données")
+plt.plot(x_ligne, linear_regression(a_lin, b_lin, x_ligne), color="blue", label="linéaire")
+plt.plot(x_ligne, quadratic_regression(a_q, b_q, c_q, x_ligne), color="red", label="quadratique")
+plt.legend()
+plt.title("Linéaire vs Quadratique")
+plt.show()
+
+# RMSE des deux au fil des epochs
+plt.plot(hist_lin, color="blue", label="linéaire")
+plt.plot(hist_q, color="red", label="quadratique")
+plt.xlabel("epochs")
+plt.ylabel("RMSE")
+plt.legend()
+plt.show()
