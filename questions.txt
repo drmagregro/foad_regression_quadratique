@@ -1,0 +1,11 @@
+Questions Part B
+
+1. les trois poids du modele sont a b et c
+2. un modele affine ax + b peut tracer qu'une droite tandis que le modele quadratique peut tracer des courbes U ou n
+3. La MSE est en une unité complexe a interpreter tandis que la RMSE est en unité beaucoup plus lisible
+
+Questions Part D 
+
+1. C'est ce qui contrôle la taille du pas qu'on fait quand les paramètres sont mis a jour.
+2. RMSE qui part dans tout les sens ou elle devient infinie soit elle diverge
+3. le modele apprend très très très très très lentement
