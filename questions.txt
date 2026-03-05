@@ -9,3 +9,9 @@ Questions Part D
 1. C'est ce qui contrôle la taille du pas qu'on fait quand les paramètres sont mis a jour.
 2. RMSE qui part dans tout les sens ou elle devient infinie soit elle diverge
 3. le modele apprend très très très très très lentement
+
+Questions part D 
+
+1. Normalement oui, mais si la learning rate est trop élevé ça peut balancer.
+2.Quand la RMSE ne bouge plus trop
+

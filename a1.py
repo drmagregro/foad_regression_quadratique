@@ -64,3 +64,43 @@ def backpropagation_quadratic(a, b, c, x, y_true, learning_rate):
     score = rmse(y_pred, y_true)
     
     return a, b, c, score
+
+# partie e
+
+def gradient_descent_quadratic(x, y, lr=0.01, epochs=1000):
+    
+    # paramètres de départ au hasard
+    a = np.random.randn()
+    b = np.random.randn()
+    c = np.random.randn()
+    
+    historique = []
+    
+    for epoch in range(epochs):
+        a, b, c, score = backpropagation_quadratic(a, b, c, x, y, lr)
+        historique.append(score)
+        
+        if epoch % 100 == 0:
+            print(f"epoch {epoch} — RMSE : {score:.4f}")
+    
+    return a, b, c, historique
+
+# j'entraîne
+a, b, c, historique = gradient_descent_quadratic(x_norm, y_norm)
+
+# figure 1
+x_ligne = np.linspace(x_norm.min(), x_norm.max(), 100)
+y_ligne = quadratic_regression(a, b, c, x_ligne)
+
+plt.scatter(x_norm, y_norm, label="données")
+plt.plot(x_ligne, y_ligne, color="red", label="quadratique")
+plt.legend()
+plt.title("Régression quadratique")
+plt.show()
+
+# figure 2
+plt.plot(historique)
+plt.xlabel("epochs")
+plt.ylabel("RMSE")
+plt.title("Évolution de la RMSE")
+plt.show()
